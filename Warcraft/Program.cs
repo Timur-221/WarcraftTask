@@ -49,9 +49,6 @@ Task info = new Task(() =>
 });
 info.Start();
 info.Wait();
-
-
-
 //static void Fight (Footman footman,Archer archer)
 //{
 //    footman.Attack(archer);
