@@ -23,7 +23,7 @@ Console.WriteLine("Битва Гладиаторов смотреть без с�
 Thread.Sleep(1000);
 Console.WriteLine("");
 
-footman.Name = "Андрей";
+mage.Name = "Андрей";
 archer.Name = "Василий";
 
 Task info = new Task(() =>
@@ -33,38 +33,43 @@ Task info = new Task(() =>
     Thread.Sleep(1000);
     Console.WriteLine("");
 
-    Console.WriteLine("Информация о Мечнике.");
-    footman.GetInfo();
+    Console.WriteLine("Информация о Маге.");
+    mage.GetInfo();
     Thread.Sleep(1000);
     Console.WriteLine("");
 
     Console.WriteLine("Начало битвы!");
-
+    Thread.Sleep(1000);
+    Task FotAttack = new Task(() => mage.CastFireBall(archer));
+    Task ArAttack = new Task(() => archer.Attack(mage));
+    FotAttack.Start();
+    FotAttack.Wait();
+    ArAttack.Start();
+    ArAttack.Wait();
 });
 info.Start();
 info.Wait();
 
-Task.Run(() => Fight(footman, archer));
-Task.Run(() => Fight(footman, archer)).Wait();
 
-static void Fight (Footman footman,Archer archer)
-{
-    footman.Attack(archer);
-    Thread.Sleep(1000);
-    archer.Attack(footman);
-    Thread.Sleep(1000);
-    footman.Attack(archer);
-    Thread.Sleep(1000);
-    archer.Attack(footman);
-    Thread.Sleep(1000);
-    footman.Attack(archer);
-    Thread.Sleep(1000);
-}
-Console.WriteLine("");
-Console.WriteLine("Андрей победил и повышает свой уровень!");
-Thread.Sleep(1000);
-blacksmith.UpgradeUnit(footman);
-footman.GetInfo();
+
+//static void Fight (Footman footman,Archer archer)
+//{
+//    footman.Attack(archer);
+//    Thread.Sleep(1000);
+//    archer.Attack(footman);
+//    Thread.Sleep(1000);
+//    footman.Attack(archer);
+//    Thread.Sleep(1000);
+//    archer.Attack(footman);
+//    Thread.Sleep(1000);
+//    footman.Attack(archer);
+//    Thread.Sleep(1000);
+//}
+//Console.WriteLine("");
+//Console.WriteLine("Андрей победил и повышает свой уровень!");
+//Thread.Sleep(1000);
+//blacksmith.UpgradeUnit(footman);
+//footman.GetInfo();
 
 //Task fight = new Task(() =>
 //{
